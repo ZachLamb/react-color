@@ -1,5 +1,6 @@
 import styles from '.././index.scss';
 import React from 'react';
+import colors from '.././_variables.scss'
 
 export default class Cell extends React.Component {
   constructor() {
