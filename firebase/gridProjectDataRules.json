@@ -3,18 +3,14 @@
         ".read" : "auth != null && data.child('users').child(auth.uid).child('admin').val() == true",
         ".write" : "auth != null && data.child('users').child(auth.uid).child('admin').val() == true",
         "users" : {
-            "$user" : {
-                "grids" : {
-                    ".read" : "auth != null",
-                    ".write" : "auth != null"
-                }
-            }
+            ".read" : "auth != null",
+            ".write" : "auth != null"
         },
         "grids" : {
             "$grid" : {
                 ".read" : "auth != null && data.child('grids').child($grid).child('users').child(auth.uid).exists()",
                 ".write" : "auth != null && data.child('grids').child($grid).child('users').child(auth.uid).exists()",
-    			".validate" : "newData.hasChildren()",
+    						".validate" : "newData.hasChildren()",
                 "numCols" : {
                   ".validate" : "newData.val() > 0"
                 },
