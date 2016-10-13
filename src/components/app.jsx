@@ -1,8 +1,9 @@
 import React from 'react';
-import MatrixID from './data.jsx';
+import {matrixID} from './data.jsx';
 import Matrix from './matrix.jsx';
 import Palette from './palette.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Randomize from './randomize.jsx';
 
 export default class App extends React.Component {
   constructor(){
@@ -20,11 +21,12 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="container">
-        <div className="col-sm-6">
+        <div className="col-xs-6">
             <Matrix color={ this.state } />
         </div>
-        <div className="col-sm-6">
-            <Palette onUpdate={ this.onUpdate }/>
+        <div className="col-xs-6">
+            <div><Palette onUpdate={ this.onUpdate }/></div>
+            <div><Randomize /></div>
         </div>
       </div>
     )
