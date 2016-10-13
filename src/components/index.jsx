@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import App from './app.jsx';
 import * as firebase from 'firebase';
+import manageLogin from '../util/login.js'
 
 const config = {
     apiKey: "AIzaSyAzPSc-CtNCs0zbU0KkIu5NzcRFnhkeabo",
@@ -12,31 +13,6 @@ const config = {
 };
 firebase.initializeApp(config);
 
-// For now we do anonymous loggin.
-// firebase.auth().signInAnonymously().catch(function(error) {
-//     console.log('Could not auth', error);
-// });
-
-function promptLogin() {
-    var provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider).then(function(result) {
-        var token = result.credential.accessToken;
-        var user = result.user;
-        console.log(token);
-        console.log(user);
-    }).catch(function(error) {
-        console.log(error);
-    });
-}
-
-firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-        console.log("user is signed in");
-        console.log(user);
-    } else {
-        console.log("NO USER");
-        promptLogin();
-    }
-});
+manageLogin(function(uid) { console.log(uid); });
 
 render(<App/>, document.querySelector("#app"));
