@@ -13,23 +13,32 @@ export default class Matrix extends React.Component {
     };
   }
 
-  componentWillReceiveProps() {
-      console.log('Props changed', this.props, this.state);
-      this.rowRef = firebase.database().ref(this.props.gridID + '/numRows');
-      this.rowRef.once('value', snap => {
-          console.log('Rows:', snap.val());
-          if (snap.val() !== null) {
-              this.setState({numRows: snap.val()});
-          }
-      });
-      this.colRef = firebase.database().ref(this.props.gridID + '/numCols');
-      this.colRef.once('value', snap => {
-          console.log('Cols:', snap.val());
-          if (snap.val() !== null) {
-              this.setState({numCols: snap.val()});
-          }
-      });
+  componentDidMount() {
+      this.updateGridSize(this.props);
   }
+
+  componentWillReceiveProps(nextProps) {
+      if (this.props.gridID !== nextProps.gridID) {
+          this.updateGridSize(nextProps);
+      }
+  }
+
+  updateGridSize(nextProps) {
+     this.setState({numRows: 0, numCols: 0});
+     this.rowRef = firebase.database().ref(nextProps.gridID + '/numRows');
+     this.rowRef.once('value', snap => {
+         if (snap.val() !== null) {
+             this.setState({numRows: snap.val()});
+         }
+     });
+     this.colRef = firebase.database().ref(nextProps.gridID + '/numCols');
+     this.colRef.once('value', snap => {
+         if (snap.val() !== null) {
+             this.setState({numCols: snap.val()});
+         }
+     });
+  }
+
 
   render() {
     if (this.state.numRows === 0 || this.state.numCols === 0) {

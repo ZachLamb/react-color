@@ -23,6 +23,10 @@ export default class Cell extends React.Component {
       });
   }
 
+  componentWillUnmount() {
+      this.cellRef.off('value');
+  }
+
   handleClick() {
     this.cellRef.set( this.props.color );
   }
