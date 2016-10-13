@@ -8,8 +8,8 @@
         },
         "grids" : {
             "$grid" : {
-                ".read" : "auth != null && data.child('grids').child($grid).child('users').child(auth.uid).exists()",
-                ".write" : "auth != null && data.child('grids').child($grid).child('users').child(auth.uid).exists()",
+                ".read" : "auth != null && data.child('users').child(auth.uid).exists()",
+                ".write" : "auth != null && data.child('users').child(auth.uid).exists()",
     						".validate" : "newData.hasChildren()",
                 "numCols" : {
                   ".validate" : "newData.val() > 0"
