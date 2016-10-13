@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import App from './app.jsx';
 import * as firebase from 'firebase';
-import manageLogin from '../util/login.js'
+import {manageLogin} from '../util/login.js'
 
 const config = {
     apiKey: "AIzaSyAzPSc-CtNCs0zbU0KkIu5NzcRFnhkeabo",
