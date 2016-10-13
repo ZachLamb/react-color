@@ -22,8 +22,19 @@ function promptLogin() {
     firebase.auth().signInWithPopup(provider).then(function(result) {
         var token = result.credential.accessToken;
         var user = result.user;
+        var uid = user.uid;
+        var email = user.email;
         console.log(token);
         console.log(user);
+        console.log(uid);
+        console.log(email);
+
+        // check if account already exists
+        var accountCheck = firebase.database().ref('users/');
+        if (!accountCheck.containsKey(uid)) {
+            accountCheck.child(uid).set({admin: 'false', email: email, gird: {}});
+        }
+
     }).catch(function(error) {
         console.log(error);
     });
