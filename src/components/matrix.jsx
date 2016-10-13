@@ -15,14 +15,14 @@ export default class Matrix extends React.Component {
 
   componentWillReceiveProps() {
       console.log('Props changed', this.props, this.state);
-      this.rowRef = firebase.database().ref(this.props.gridID + '/numRows');
+      this.rowRef = firebase.database().ref('grids/' + this.props.gridID + '/numRows');
       this.rowRef.once('value', snap => {
           console.log('Rows:', snap.val());
           if (snap.val() !== null) {
               this.setState({numRows: snap.val()});
           }
       });
-      this.colRef = firebase.database().ref(this.props.gridID + '/numCols');
+      this.colRef = firebase.database().ref('grids/' + this.props.gridID + '/numCols');
       this.colRef.once('value', snap => {
           console.log('Cols:', snap.val());
           if (snap.val() !== null) {
