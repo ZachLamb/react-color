@@ -2,6 +2,7 @@ import React from 'react';
 import Matrix from './matrix.jsx';
 import Palette from './palette.jsx';
 import GridSelector from './GridSelection.jsx';
+import ShareComponent from './shareComponent.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class App extends React.Component {
@@ -9,7 +10,7 @@ export default class App extends React.Component {
     super();
     this.state = {
       selectedColor: 'rgb(0, 0, 0)',
-      gridId: 'grids/grid0',
+      gridId: 'grid0',
       possibleGrids: {
         grid0: true,
         grid1: true
@@ -37,8 +38,11 @@ export default class App extends React.Component {
             <Matrix color={ this.state.selectedColor }
                     gridID={ this.state.gridId }/>
         </div>
-        <div className="col-sm-6">
+        <div className="col-sm-5">
             <Palette onUpdate={ this.onUpdate }/>
+        </div>
+        <div className="col-sm-1">
+            <ShareComponent gridID={ this.state.gridId }/>
         </div>
       </div>
     )

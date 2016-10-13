@@ -17,7 +17,7 @@ export default class GridSelector extends React.Component {
     for (let gridName in this.state.possibleGrids) {
         buttons.push(<button onClick={() => {
             console.log(gridName);
-            this.props.gridSelector('grids/' + gridName);
+            this.props.gridSelector(gridName);
         }}>{gridName}</button>)
     }
     return (

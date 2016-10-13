@@ -13,7 +13,7 @@ export default class Cell extends React.Component {
   }
 
   componentDidMount() {
-      this.cellRef = firebase.database().ref(this.props.gridID
+      this.cellRef = firebase.database().ref('grids/' + this.props.gridID
                                              + '/r' + this.props.row
                                              + '/c' + this.props.col);
       this.cellRef.on('value', snap => {
