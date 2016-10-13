@@ -1,15 +1,15 @@
 {
     "rules" : {
-        ".read" : "auth != null && data.child('users').child(auth.email).child('admin').val() == true",
-        ".write" : "auth != null && data.child('users').child(auth.email).child('admin').val() == true",
+        ".read" : "auth != null && data.child('users').child(auth.uid).child('admin').val() == true",
+        ".write" : "auth != null && data.child('users').child(auth.uid).child('admin').val() == true",
         "users" : {
             ".read" : "auth != null",
             ".write" : "auth != null"
         },
         "grids" : {
             "$grid" : {
-                ".read" : "auth != null && data.child('grids').child($grid).child('users').child(auth.email).exists()",
-                ".write" : "auth != null && data.child('grids').child($grid).child('users').child(auth.email).exists()",
+                ".read" : "auth != null && data.child('grids').child($grid).child('users').child(auth.uid).exists()",
+                ".write" : "auth != null && data.child('grids').child($grid).child('users').child(auth.uid).exists()",
     						".validate" : "newData.hasChildren()",
                 "numCols" : {
                   ".validate" : "newData.val() > 0"
