@@ -2,7 +2,6 @@ import React from 'react';
 import { render } from 'react-dom';
 import App from './app.jsx';
 import * as firebase from 'firebase';
-import {manageLogin} from '../util/login.js'
 
 const config = {
     apiKey: "AIzaSyAzPSc-CtNCs0zbU0KkIu5NzcRFnhkeabo",
@@ -13,6 +12,5 @@ const config = {
 };
 firebase.initializeApp(config);
 
-manageLogin(function(uid) { console.log(uid); });
 
 render(<App/>, document.querySelector("#app"));

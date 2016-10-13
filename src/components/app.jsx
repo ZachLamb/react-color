@@ -4,20 +4,31 @@ import Palette from './palette.jsx';
 import GridSelector from './GridSelection.jsx';
 import ShareComponent from './shareComponent.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import * as firebase from 'firebase';
+import {manageLogin} from '../util/login.js'
 
 export default class App extends React.Component {
   constructor() {
     super();
     this.state = {
       selectedColor: 'rgb(0, 0, 0)',
-      gridId: 'grid0',
-      possibleGrids: {
-        grid0: true,
-        grid1: true
-      }
+      gridId: 'null',
+      possibleGrids: {}
     }
     this.onUpdate = this.onUpdate.bind(this);
     this.changeGrid = this.changeGrid.bind(this);
+    this.getAvailableGrids = this.getAvailableGrids.bind(this);
+  }
+
+  componentDidMount() {
+    manageLogin(this.getAvailableGrids);
+  }
+
+  getAvailableGrids(uid) {
+     let userGridsRef = firebase.database().ref('users/' + uid + '/grids');
+     userGridsRef.on('value', snap => {
+         this.setState({possibleGrids: snap.val()});
+     });
   }
 
   onUpdate( val ){
@@ -29,10 +40,12 @@ export default class App extends React.Component {
   }
 
   render() {
+      console.log(this.state.possibleGrids);
     return (
       <div className="container">
         <div>
-            <GridSelector gridSelector={this.changeGrid}/>
+            <GridSelector gridSelector={this.changeGrid}
+                          possibleGrids={this.state.possibleGrids}/>
         </div>
         <div className="col-sm-6">
             <Matrix color={ this.state.selectedColor }
