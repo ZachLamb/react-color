@@ -10,21 +10,23 @@
                 }
             }
         },
-        "$grid" : {
-            ".read" : "auth != null && data.child('grids').child($grid).child('users').child(auth.uid).exists()",
-            ".write" : "auth != null && data.child('grids').child($grid).child('users').child(auth.uid).exists()",
-			".validate" : "newData.hasChildren()",
-            "numCols" : {
-              ".validate" : "newData.val() > 0"
-            },
-            "numRows" : {
-              ".validate" : "newData.val() > 0"
-            },
-            "$row" : {
-                ".validate" : "$row.matches(/^(r)[0-9]+$/) && newData.hasChildren()",
-                "$col" : {
-                    ".validate" : "$col.matches(/^(c)[0-9]+$/) && newData.val().matches(/^(rgb\\()(((0|1)?[0-9]{1,2}|2[0-4][0-9]|25[0-5]),( )?){2}((0|1)?[0-9]{1,2}|2[0-4][0-9]|25[0-5])\\)$/)"
+        "grids" : {
+            "$grid" : {
+                ".read" : "auth != null && data.child('grids').child($grid).child('users').child(auth.uid).exists()",
+                ".write" : "auth != null && data.child('grids').child($grid).child('users').child(auth.uid).exists()",
+    			".validate" : "newData.hasChildren()",
+                "numCols" : {
+                  ".validate" : "newData.val() > 0"
+                },
+                "numRows" : {
+                  ".validate" : "newData.val() > 0"
+                },
+                "$row" : {
+                    ".validate" : "$row.matches(/^(r)[0-9]+$/) && newData.hasChildren()",
+                    "$col" : {
+                        ".validate" : "$col.matches(/^(c)[0-9]+$/) && newData.val().matches(/^(rgb\\()(((0|1)?[0-9]{1,2}|2[0-4][0-9]|25[0-5]),( )?){2}((0|1)?[0-9]{1,2}|2[0-4][0-9]|25[0-5])\\)$/)"
 
+                    }
                 }
             }
         }
