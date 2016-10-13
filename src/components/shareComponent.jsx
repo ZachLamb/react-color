@@ -42,10 +42,6 @@ export default class ShareComponent extends React.Component {
                     }
                 });
             }
-            else
-            {
-                console.log("No user account found for " + this.state.userToShareWith);
-            }
         });
     }
 
