@@ -1,11 +1,11 @@
 {
     "rules" : {
-        ".read" : "auth != null && data.child('adminUsers').child(auth.uid).val() == true",
-        ".write" : "auth != null && data.child('adminUsers').child(auth.uid).val() == true",
+        ".read" : "auth != null && data.child('users').child(auth.uid).child('admin').val() == true",
+        ".write" : "auth != null && data.child('users').child(auth.uid).val('admin') == true",
         "$grid" : {
-            ".read" : "auth != null && data.child('users').child(auth.uid).child('active').val() == true",
-            ".write" : "auth != null && data.child('users').child(auth.uid).child('active').val() == true",
-			".validate" : "$grid.matches(/^(grid)[0-9]+$/) && newData.hasChildren()",
+            ".read" : "auth != null && data.child('grids').child($grid).child(users).child(auth.uid).exists() == true",
+            ".write" : "auth != null && data.child('grids').child($grid).child(users).child(auth.uid).exists() == true",
+			".validate" : "newData.hasChildren()",
             "numCols" : {
               ".validate" : "newData.val() > 0"
             },
