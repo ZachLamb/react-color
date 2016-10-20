@@ -23,7 +23,8 @@ export default class App extends React.Component {
       gridId: 'null',
       possibleGrids: {},
       numRows: 0,
-      numCols: 0
+      numCols: 0,
+      user_id: null
     }
     this.onUpdate = this.onUpdate.bind(this);
     this.changeGrid = this.changeGrid.bind(this);
@@ -39,6 +40,7 @@ export default class App extends React.Component {
      userGridsRef.on('value', snap => {
          this.setState({possibleGrids: snap.val()});
      });
+     this.setState({user_id: uid});
   }
 
   onUpdate( val ){
@@ -65,7 +67,7 @@ export default class App extends React.Component {
     console.log(this.state.gridId);
     return (
       <div>
-        <NavBar/>
+        <NavBar changeGrid={this.changeGrid}/>
         <div className="container">
           <div className="row">
             <div className={styles.topBuffer}></div>
