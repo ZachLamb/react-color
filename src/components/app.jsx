@@ -16,7 +16,6 @@ import styles from '../main.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {manageLogin} from '../util/login.js'
-var user;
 
 export default class App extends React.Component {
   constructor() {
@@ -32,22 +31,24 @@ export default class App extends React.Component {
     this.onSelectColor = this.onSelectColor.bind(this);
     this.changeGrid = this.changeGrid.bind(this);
     this.getAvailableGrids = this.getAvailableGrids.bind(this);
+    this.checkLogout = this.checkLogout.bind(this);
   }
 
   componentDidMount() {
      manageLogin(this.getAvailableGrids)
-     var session = localStorage.getItem('displayName')
-     this.setState({displayName: session})
   }
   getAvailableGrids(uid) {
      let userGridsRef = firebase.database().ref('users/' + uid + '/grids');
+     let session = localStorage.getItem('displayName')
+     this.setState({displayName: session});
      userGridsRef.on('value', snap => {
-         this.setState({possibleGrids: snap.val()});
+         this.setState({possibleGrids: snap.val()})
      });
   }
-  logout(){
-    localStorage.clear();
-    location.reload();
+  checkLogout(){
+    let session = localStorage.getItem('displayName')
+    this.setState({displayName: null});
+    this.setState({gridId: null})
   }
   onSelectColor( val ){
     this.setState({ selectedColor: val });
@@ -113,7 +114,7 @@ export default class App extends React.Component {
                <DeleteGrid/>
               </div>
               <div className="col-sm-2">
-                <Logout logout={this.logout}/>
+                <Logout checkLog={this.checkLogout}/>
               </div>
             </div>
           </div>

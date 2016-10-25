@@ -18,7 +18,7 @@ export default class Matrix extends React.Component {
  }
 
   componentWillReceiveProps(nextProps) {
-      if (this.props.numCols !== nextProps.numCols) {
+      if (this.props.numCols !== nextProps.numCols || this.props.gridID !== nextProps.gridID) {
           this.updateGridSize(nextProps);
       }
   }

@@ -35,11 +35,11 @@ function promptForLogin(uidCallback) {
 export function manageLogin(uidCallback,myUser) {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-            uidCallback(user.uid);
             localStorage.setItem("displayName",user.displayName);
+            uidCallback(user.uid);
         } else {
+            localStorage.setItem("displayName","null");
             promptForLogin(uidCallback);
-            localStorage.setItem("displayName",null);
         }
     });
 }

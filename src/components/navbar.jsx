@@ -7,7 +7,7 @@ export default class NavBar extends React.Component {
     this.state ={
       displayName: null
     }
-    this.handleClick = this.handleClick.bind( this );
+    // this.handleClick = this.handleClick.bind( this );
   }
   componentWillReceiveProps(nextProps) {
       if (this.props.name !== nextProps.name) {
@@ -21,7 +21,7 @@ export default class NavBar extends React.Component {
   // }
   render(){
 
-    if(this.props.name){
+    if(this.state.displayName != "null"){
       return(
         <nav className="navbar navbar-light bg-faded">
           <a className="navbar-brand" href="#">React Color</a>
@@ -39,7 +39,7 @@ export default class NavBar extends React.Component {
         </nav>
     );
     }
-    else{
+    else {
       return(
 
         <nav className="navbar navbar-light bg-faded">
