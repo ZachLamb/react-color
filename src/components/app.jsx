@@ -10,11 +10,13 @@ import ShareComponent from './shareComponent.jsx';
 import NavBar from './navbar.jsx';
 import DeleteGrid from './deleteGrid.jsx';
 import ResetGridColor from './resetGridColor.jsx';
+import Logout from './logout.jsx'
 
 import styles from '../main.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {manageLogin} from '../util/login.js'
+var user;
 
 export default class App extends React.Component {
   constructor() {
@@ -24,7 +26,8 @@ export default class App extends React.Component {
       gridId: 'null',
       possibleGrids: {},
       numRows: 0,
-      numCols: 0
+      numCols: 0,
+      displayName: null
     }
     this.onSelectColor = this.onSelectColor.bind(this);
     this.changeGrid = this.changeGrid.bind(this);
@@ -32,16 +35,20 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    manageLogin(this.getAvailableGrids);
+     manageLogin(this.getAvailableGrids)
+     var session = localStorage.getItem('displayName')
+     this.setState({displayName: session})
   }
-
   getAvailableGrids(uid) {
      let userGridsRef = firebase.database().ref('users/' + uid + '/grids');
      userGridsRef.on('value', snap => {
          this.setState({possibleGrids: snap.val()});
      });
   }
-
+  logout(){
+    localStorage.clear();
+    location.reload();
+  }
   onSelectColor( val ){
     this.setState({ selectedColor: val });
   }
@@ -65,7 +72,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <NavBar/>
+        <NavBar name={ this.state.displayName }/>
         <div className="container">
           <div className="row">
             <div className={styles.topBuffer}></div>
@@ -104,6 +111,9 @@ export default class App extends React.Component {
               </div>
              <div className="col-sm-5">
                <DeleteGrid/>
+              </div>
+              <div className="col-sm-2">
+                <Logout logout={this.logout}/>
               </div>
             </div>
           </div>

@@ -2,22 +2,62 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class NavBar extends React.Component {
-  render(){
-    return(
-      <nav className="navbar navbar-light bg-faded">
-        <a className="navbar-brand" href="#">React Color</a>
-        <ul className="nav navbar-nav">
-          <li className="nav-item active">
-            <a className="nav-link" href="#">Dashboard <span className="sr-only">(current)</span></a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">New Grid</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">Login</a>
-          </li>
-        </ul>
-      </nav>
-    );
+  constructor(){
+    super();
+    this.state ={
+      displayName: null
+    }
+    this.handleClick = this.handleClick.bind( this );
   }
+  componentWillReceiveProps(nextProps) {
+      if (this.props.name !== nextProps.name) {
+      this.setState({displayName: nextProps.name});
+      }
+  }
+
+  // handleClick() {
+  //   localStorage.clear()
+  //   // location.reload()
+  // }
+  render(){
+
+    if(this.props.name){
+      return(
+        <nav className="navbar navbar-light bg-faded">
+          <a className="navbar-brand" href="#">React Color</a>
+          <ul className="nav navbar-nav">
+            <li className="nav-item active">
+              <a className="nav-link" href="#">Dashboard <span className="sr-only">(current)</span></a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">New Grid</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">{this.props.name}</a>
+            </li>
+          </ul>
+        </nav>
+    );
+    }
+    else{
+      return(
+
+        <nav className="navbar navbar-light bg-faded">
+          <a className="navbar-brand" href="#">React Color</a>
+          <ul className="nav navbar-nav">
+            <li className="nav-item active">
+              <a className="nav-link" href="#">Dashboard <span className="sr-only">(current)</span></a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">New Grid</a>
+            </li>
+          </ul>
+        </nav>
+      );
+    }
+  }
+}
+
+NavBar.propTypes = {
+  name: React.PropTypes.string
 }
