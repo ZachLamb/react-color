@@ -23,8 +23,8 @@ export default class App extends React.Component {
       selectedColor: 'rgb(0, 0, 0)',
       gridId: 'null',
       possibleGrids: {},
-      numRows: 0,
-      numCols: 0
+      numRows: "0",
+      numCols: "0"
     }
     this.onSelectColor = this.onSelectColor.bind(this);
     this.changeGrid = this.changeGrid.bind(this);
@@ -88,8 +88,8 @@ export default class App extends React.Component {
             <div className="col-xs-12 col-sm-12 col-md-10">
                 <Matrix color={ this.state.selectedColor }
                         gridID={ this.state.gridId }
-                        numCols={this.state.numCols }
-                        numRows={ this.state.numRows }
+                        numCols={parseInt(this.state.numCols) }
+                        numRows={ parseInt(this.state.numRows) }
                 />
             </div>
             <div className="col-xs-12 col-sm-12 col-md-2">
@@ -100,7 +100,7 @@ export default class App extends React.Component {
                 <ShareComponent gridID={ this.state.gridId }/>
               </div>
               <div className="cols-sm-offset-2 col-sm-2">
-                <MatrixSize gridId={ this.state.gridId} updateGrid={this.changeGrid}/>
+                <MatrixSize gridId={this.state.gridId} updateGrid={this.changeGrid}/>
               </div>
              <div className="col-sm-5">
                <DeleteGrid/>
