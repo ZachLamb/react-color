@@ -10,6 +10,7 @@ import ShareComponent from './shareComponent.jsx';
 import NavBar from './navbar.jsx';
 import DeleteGrid from './deleteGrid.jsx';
 import ResetGridColor from './resetGridColor.jsx';
+import Logout from './logout.jsx'
 
 import styles from '../main.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -24,24 +25,31 @@ export default class App extends React.Component {
       gridId: 'null',
       possibleGrids: {},
       numRows: 0,
-      numCols: 0
+      numCols: 0,
+      displayName: null
     }
     this.onSelectColor = this.onSelectColor.bind(this);
     this.changeGrid = this.changeGrid.bind(this);
     this.getAvailableGrids = this.getAvailableGrids.bind(this);
+    this.checkLogout = this.checkLogout.bind(this);
   }
 
   componentDidMount() {
-    manageLogin(this.getAvailableGrids);
+     manageLogin(this.getAvailableGrids)
   }
-
   getAvailableGrids(uid) {
      let userGridsRef = firebase.database().ref('users/' + uid + '/grids');
+     let session = localStorage.getItem('displayName')
+     this.setState({displayName: session});
      userGridsRef.on('value', snap => {
-         this.setState({possibleGrids: snap.val()});
+         this.setState({possibleGrids: snap.val()})
      });
   }
-
+  checkLogout(){
+    let session = localStorage.getItem('displayName')
+    this.setState({displayName: null});
+    this.setState({gridId: null})
+  }
   onSelectColor( val ){
     this.setState({ selectedColor: val });
   }
@@ -63,52 +71,64 @@ export default class App extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <NavBar/>
-        <div className="container">
-          <div className="row">
-            <div className={styles.topBuffer}></div>
-            <div className="col-sm-2">
-              <GridSelector gridSelector={this.changeGrid}
-                            possibleGrids={this.state.possibleGrids}
-              />
-            </div>
-            <div className="col-sm-2">
-              <Randomize gridId={this.state.gridId}/>
-            </div>
-            <div className="col-sm-2">
-              <ResetGridColor gridId={ this.state.gridId }
-                              numCols={ this.state.numCols }
-                              numRows={ this.state.numRows }
-              />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-xs-12 col-sm-12 col-md-10">
-                <Matrix color={ this.state.selectedColor }
-                        gridID={ this.state.gridId }
-                        numCols={this.state.numCols }
-                        numRows={ this.state.numRows }
+    if(this.state.displayName == null){
+      return (
+        <div>
+          <NavBar name={ this.state.displayName }/>
+        </div>
+      )
+    }
+    else{
+      return (
+        <div>
+          <NavBar name={ this.state.displayName }/>
+          <div className="container">
+            <div className="row">
+              <div className={styles.topBuffer}></div>
+              <div className="col-sm-2">
+                <GridSelector gridSelector={this.changeGrid}
+                              possibleGrids={this.state.possibleGrids}
                 />
-            </div>
-            <div className="col-xs-12 col-sm-12 col-md-2">
-                <Palette onSelectColor={ this.onSelectColor }/>
+              </div>
+              <div className="col-sm-2">
+                <Randomize gridId={this.state.gridId}/>
+              </div>
+              <div className="col-sm-2">
+                <ResetGridColor gridId={ this.state.gridId }
+                                numCols={ this.state.numCols }
+                                numRows={ this.state.numRows }
+                />
+              </div>
             </div>
             <div className="row">
-              <div className="cols-sm-offset-3 col-sm-3">
-                <ShareComponent gridID={ this.state.gridId }/>
+              <div className="col-xs-12 col-sm-12 col-md-10">
+                  <Matrix color={ this.state.selectedColor }
+                          gridID={ this.state.gridId }
+                          numCols={this.state.numCols }
+                          numRows={ this.state.numRows }
+                  />
               </div>
-              <div className="cols-sm-offset-2 col-sm-2">
-                <MatrixSize gridId={ this.state.gridId} updateGrid={this.changeGrid}/>
+              <div className="col-xs-12 col-sm-12 col-md-2">
+                  <Palette onSelectColor={ this.onSelectColor }/>
               </div>
-             <div className="col-sm-5">
-               <DeleteGrid/>
+              <div className="row">
+                <div className="cols-sm-offset-3 col-sm-3">
+                  <ShareComponent gridID={ this.state.gridId }/>
+                </div>
+                <div className="cols-sm-offset-2 col-sm-2">
+                  <MatrixSize gridId={ this.state.gridId} updateGrid={this.changeGrid}/>
+                </div>
+               <div className="col-sm-5">
+                 <DeleteGrid/>
+                </div>
+                <div className="col-sm-2">
+                  <Logout checkLog={this.checkLogout}/>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    )
+      )
+    }
   }
 }

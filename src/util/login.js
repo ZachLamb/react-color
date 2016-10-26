@@ -32,11 +32,13 @@ function promptForLogin(uidCallback) {
  * Args:
  *  uidCallback: Callback to be executed with parameter of user id.
  */
-export function manageLogin(uidCallback) {
+export function manageLogin(uidCallback,myUser) {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
+            localStorage.setItem("displayName",user.displayName);
             uidCallback(user.uid);
         } else {
+            localStorage.setItem("displayName","null");
             promptForLogin(uidCallback);
         }
     });
