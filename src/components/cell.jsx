@@ -20,6 +20,9 @@ export default class Cell extends React.Component {
           if (snap.val() !== null) {
               this.setState({color: snap.val()});
           }
+          else {
+              this.setState({color: 'rgb(255, 255, 255)'});
+          }
       });
   }
 
