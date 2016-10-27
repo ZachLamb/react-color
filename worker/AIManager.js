@@ -13,10 +13,16 @@ function getServiceAccountAuth() {
     });
 }
 
+function testUsage() {
+    var testGrid = new VirtualGrid('-KV2otjtLK1K8LaOsMy-');
+    setTimeout(function(){ testGrid.setCell(0, 0, [100, 100, 100]); }, 1000);
+    setTimeout(function(){ console.log(testGrid.getCell(0, 0)); }, 3000);
+    setTimeout(function(){ console.log(testGrid.getDimensions()); }, 5000);
+}
 
 function main() {
     getServiceAccountAuth();
-    var testGrid = new VirtualGrid('-KV2otjtLK1K8LaOsMy-');
+    testUsage();
 }
 
 main();

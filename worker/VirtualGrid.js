@@ -2,6 +2,8 @@
  *
  * Creates a virtual grid in which we can observer cell values and set cell
  * values. The changes will then be reflected in the actual database.
+ * NOTE: Everything loads asynchronously so after creating the VirtualGrid
+ * wait a few seconds for things to get situtated.
  */
 "use strict";
 var firebase = require('firebase');
@@ -23,7 +25,12 @@ class VirtualGrid {
      *  color: Color to set to represented as a list of 3 values 0-255.
      */
     setCell(row, col, color) {
-        console.log(color);
+        var rgbString = 'rgb(' + color[0] + ', ' + color[1] + ', ' + color[2]
+                + ')';
+        // Update the Firebase, changes should propagate to grid.
+        var cellPath = 'grids/' + this.gridId + '/r' + row + '/c' + col;
+        var cellRef = firebase.database().ref(cellPath);
+        cellRef.set(rgbString);
     }
 
     /* Gets a cell value.
@@ -37,6 +44,14 @@ class VirtualGrid {
      */
     getCell(row, col) {
         return this.grid[row][col];
+    }
+
+    /* Gets the dimensions of the grid.
+     *
+     * Returns: The dimensions of the grids as a list [row, col].
+     */
+    getDimensions() {
+        return [this.grid.length, this.grid[0].length];
     }
 
     /* Sets up the grid by creating nested list data structure and attaching
@@ -73,7 +88,6 @@ class VirtualGrid {
                 }
                 try {
                     matrix[row][col][0] = [rVal, gVal, bVal];
-                    console.log(matrix);
                 } catch (err) {
                     console.log(err);
                 }
