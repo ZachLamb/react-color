@@ -3,6 +3,7 @@
  * Creates a virtual grid in which we can observer cell values and set cell
  * values. The changes will then be reflected in the actual database.
  */
+"use strict";
 var firebase = require('firebase');
 
 var NUM_ROWS = 'numRows/';
@@ -45,7 +46,7 @@ class VirtualGrid {
      *  gridId: The id of the grid in firebase.
      */
     _setUpGrid(gridId) {
-        var gridPath = '/grids/' + gridId + '/';
+        var gridPath = 'grids/' + gridId + '/';
         var rowNumRef = firebase.database().ref(gridPath + NUM_ROWS);
         var colNumRef = firebase.database().ref(gridPath + NUM_COLS);
         var matrix = []
@@ -54,18 +55,28 @@ class VirtualGrid {
         function createCellUpdater(row, col) {
             return function(cellSnapshot) {
                 // Parse the cells value into 3 integers.
+                var rVal = 0;
+                var gVal = 0;
+                var bVal = 0;
                 var rgbVal = cellSnapshot.val();
-                var integers = rgbVal.substring(rgbVal.indexOf('(') + 1,
-                        rgbVal.indexOf(')'));
-                var rVal = parseInt(integers.substring(0,
-                            integers.indexOf(',')));
-                integers = integers.substring(integers.indexOf(',') + 2,
-                        integers.length)
-                var gVal = parseInt(integers.substring(0,
-                            integers.indexOf(',')));
-                var bVal = parseInt(integers.substring(integers.indexOf(',')
-                            + 2, integers.length));
-                matrix[row][col] = [rVal, gVal, bVal];
+                if (rgbVal !== null) {
+                    var integers = rgbVal.substring(rgbVal.indexOf('(') + 1,
+                            rgbVal.indexOf(')'));
+                    rVal = parseInt(integers.substring(0,
+                                integers.indexOf(',')));
+                    integers = integers.substring(integers.indexOf(',') + 2,
+                            integers.length)
+                    gVal = parseInt(integers.substring(0,
+                                integers.indexOf(',')));
+                    bVal = parseInt(integers.substring(integers.indexOf(',')
+                                + 2, integers.length));
+                }
+                try {
+                    matrix[row][col][0] = [rVal, gVal, bVal];
+                    console.log(matrix);
+                } catch (err) {
+                    console.log(err);
+                }
             }
         }
 
@@ -78,29 +89,39 @@ class VirtualGrid {
                 for (var c = 0; c < numCols; c++) {
                     var cellRef = firebase.database().ref(rowPath + 'c'
                             + String(c));
-                    cellRef.once('value', createCellUpdater(matrix, r, c));
+                    cellRef.once('value', createCellUpdater(r, c));
                 }
             }
         }
 
         // Fetch rows and columns and then install handlers.
         rowNumRef.once('value', function(rowNumSnapshot) {
-             for (var i = 0; i < rowNumSnapshot.val(); i++) {
-                 matrix.push([]);
+             if (rowNumSnapshot.val() === null) {
+                 throw 'Null column received';
+             } else {
+                for (var i = 0; i < rowNumSnapshot.val(); i++) {
+                    matrix.push([]);
+                }
+                colNumRef.once('value', function(colNumSnapshot) {
+                    if (colNumSnapshot.val() === null) {
+                        throw 'Null column received';
+                    } else {
+                        for (var j = 0; j < matrix.length; j++) {
+                            for (var k = 0; k < colNumSnapshot.val(); k++) {
+                                matrix[j].push([]);
+                            }
+                        }
+                        installHandlers();
+                    }
+                }, function(err) {
+                    console.log(err);
+                });
              }
-             colNumRef.once('value', function(colNumSnapshot) {
-                 for (var j = 0; j < matrix.length; j++) {
-                     for (var k = 0; k < colNumSnapshot.val(); k++) {
-                         matrix[j].push([]);
-                     }
-                 }
-                 installHandlers();
-             }, function(err) {
-                 console.log(err);
-             });
         }, function (err) {
             console.log(err)
         });
         return matrix;
     }
 }
+
+module.exports = VirtualGrid;
