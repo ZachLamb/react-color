@@ -10,7 +10,8 @@ export default class ShareComponent extends React.Component {
     super();
     this.state = {
         userToShareWith: '',
-        currentUsers: [ ' no one.' ],
+        shareMessage: 'Grid is null',
+        currentUsers: [ ],
         showModal: false
     }
 
@@ -58,7 +59,11 @@ export default class ShareComponent extends React.Component {
           } );
         } );
 
-        this.setState({ currentUsers: currentUserEmails });
+        if(currentUserEmails.length == 0) {
+            currentUserEmails.push('no one');
+        }
+
+        this.setState({ shareMessage: 'Currently sharing with ', currentUsers: currentUserEmails });
     }
   }
 
@@ -107,7 +112,7 @@ export default class ShareComponent extends React.Component {
         } );
       }
       else {
-          this.setState({ showModal: false });
+          this.setState({ shareMessage: 'Grid is null'});
       }
   }
 
@@ -122,7 +127,7 @@ export default class ShareComponent extends React.Component {
           </Modal.Header>
           <Modal.Body>
             <input type="text" className="form-control" placeholder="Enter an email address" onChange={ this.onUpdate }/>
-            <p className={ styles.sharedWith }>Currently shared with
+            <p className={ styles.sharedWith }> { this.state.shareMessage }
               <span className={ styles.userList }> { this.state.currentUsers.join(', ') }</span>
             </p>
           </Modal.Body>
