@@ -43,7 +43,7 @@ class VirtualGrid {
      *  values from 0-255.
      */
     getCell(row, col) {
-        return this.grid[row][col];
+        return this.grid[row][col][0];
     }
 
     /* Gets the dimensions of the grid.
