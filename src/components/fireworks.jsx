@@ -39,7 +39,7 @@ export default class Fireworks extends React.Component {
     var columnsEast = columns - columnNum;
     var columnsWest = columnNum;
     while (rowsNorth > 0 || rowsSouth < rows || columnsEast < columns || columnsWest > 0) {
-      
+
       if (rowsNorth > 0) {
         this.north(gridId, rowsNorth, columnNum);
         rowsNorth--;
@@ -60,60 +60,121 @@ export default class Fireworks extends React.Component {
         columnsWest--;
       }
 
+      // ADVANCED DIRECTIONS (do not work currently)
+      // if (rowsNorth > 0 && columnsEast < columns) {
+      //   this.northEast(gridId, rowsNorth, columnsEast);
+      //   rowsNorth--;
+      //   columnsEast++;
+      // }
+
+      // if (rowsSouth < rows && columnsEast < columns) {
+      //   this.southEast(gridId, rowsSouth, columnsEast);
+      //   rowsSouth++;
+      //   columnsEast++;
+      // }
+
+      // if (rowsSouth < rows && columnsWest > 0) {
+      //   this.southWest(gridId, rowsSouth, columnsWest);
+      //   rowsSouth++;
+      //   columnsWest--;
+      // }
+
+      // if (rowsNorth > 0 && columnsWest > 0) {
+      //   this.northWest(gridId, rowsNorth, columnsWest);
+      //   rowsNorth--;
+      //   columnsWest--;
+      // }
+
     }
   }
 
   north(gridId, startRow, startColumn) {
-    if (startRow > 0) {
-      const cursorRow = 'r' + (startRow-1) + '/';
-      const cursorColumn = 'c' + startColumn + '/';
-      const cellRef = firebase.database().ref('grids/' + gridId + cursorRow + cursorColumn);
-      const color = "rgb(255, 0, 0)";
+    const cursorRow = 'r' + (startRow-1) + '/';
+    const cursorColumn = 'c' + startColumn + '/';
+    const cellRef = firebase.database().ref('grids/' + gridId + cursorRow + cursorColumn);
+    const color = "rgb(255, 0, 0)";
 
-      cellRef.transaction(function() {
-        return color;
-      });
-    }
+    cellRef.transaction(function() {
+      return color;
+    });
   }
 
   south(gridId, startRow, startColumn) {
-    if (startRow > 0) {
-      const cursorRow = 'r' + (startRow+1) + '/';
-      const cursorColumn = 'c' + startColumn + '/';
-      const cellRef = firebase.database().ref('grids/' + gridId + cursorRow + cursorColumn);
-      const color = "rgb(255, 0, 0)";
+    const cursorRow = 'r' + (startRow+1) + '/';
+    const cursorColumn = 'c' + startColumn + '/';
+    const cellRef = firebase.database().ref('grids/' + gridId + cursorRow + cursorColumn);
+    const color = "rgb(255, 0, 0)";
 
-      cellRef.transaction(function() {
-        return color;
-      });
-    }
+    cellRef.transaction(function() {
+      return color;
+    });
   }
 
   east(gridId, startRow, startColumn) {
-    if (startRow > 0) {
-      const cursorRow = 'r' + startRow + '/';
-      const cursorColumn = 'c' + (startColumn+1) + '/';
-      const cellRef = firebase.database().ref('grids/' + gridId + cursorRow + cursorColumn);
-      const color = "rgb(255, 0, 0)";
+    const cursorRow = 'r' + startRow + '/';
+    const cursorColumn = 'c' + (startColumn+1) + '/';
+    const cellRef = firebase.database().ref('grids/' + gridId + cursorRow + cursorColumn);
+    const color = "rgb(255, 0, 0)";
 
-      cellRef.transaction(function() {
-        return color;
-      });
-    }
+    cellRef.transaction(function() {
+      return color;
+    });
   }
 
   west(gridId, startRow, startColumn) {
-    if (startRow > 0) {
-      const cursorRow = 'r' + startRow + '/';
-      const cursorColumn = 'c' + (startColumn-1) + '/';
-      const cellRef = firebase.database().ref('grids/' + gridId + cursorRow + cursorColumn);
-      const color = "rgb(255, 0, 0)";
+    const cursorRow = 'r' + startRow + '/';
+    const cursorColumn = 'c' + (startColumn-1) + '/';
+    const cellRef = firebase.database().ref('grids/' + gridId + cursorRow + cursorColumn);
+    const color = "rgb(255, 0, 0)";
 
-      cellRef.transaction(function() {
-        return color;
-      });
-    }
+    cellRef.transaction(function() {
+      return color;
+    });
   }
+
+  // northEast(gridId, startRow, startColumn) {
+  //   const cursorRow = 'r' + (startRow-1) + '/';
+  //   const cursorColumn = 'c' + (startColumn+1) + '/';
+  //   const cellRef = firebase.database().ref('grids/' + gridId + cursorRow + cursorColumn);
+  //   const color = "rgb(255, 0, 0)";
+
+  //   cellRef.transaction(function() {
+  //     return color;
+  //   });
+  // }
+
+  // southEast(gridId, startRow, startColumn) {
+  //   const cursorRow = 'r' + (startRow+1) + '/';
+  //   const cursorColumn = 'c' + (startColumn+1) + '/';
+  //   const cellRef = firebase.database().ref('grids/' + gridId + cursorRow + cursorColumn);
+  //   const color = "rgb(255, 0, 0)";
+
+  //   cellRef.transaction(function() {
+  //     return color;
+  //   });
+  // }
+
+  // southWest(gridId, startRow, startColumn) {
+  //   const cursorRow = 'r' + (startRow+1) + '/';
+  //   const cursorColumn = 'c' + (startColumn-1) + '/';
+  //   const cellRef = firebase.database().ref('grids/' + gridId + cursorRow + cursorColumn);
+  //   const color = "rgb(255, 0, 0)";
+
+  //   cellRef.transaction(function() {
+  //     return color;
+  //   });
+  // }
+
+  // northWest(gridId, startRow, startColumn) {
+  //   const cursorRow = 'r' + (startRow-1) + '/';
+  //   const cursorColumn = 'c' + (startColumn-1) + '/';
+  //   const cellRef = firebase.database().ref('grids/' + gridId + cursorRow + cursorColumn);
+  //   const color = "rgb(255, 0, 0)";
+
+  //   cellRef.transaction(function() {
+  //     return color;
+  //   });
+  // }
 
   render() {
     return (

@@ -1,6 +1,7 @@
 import React from 'react';
 import * as firebase from 'firebase';
 import Palette from './palette.jsx';
+import Fireworks from './fireworks.jsx';
 import styles from '.././main.scss';
 
 export default class Cell extends React.Component {
