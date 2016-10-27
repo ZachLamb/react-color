@@ -54,7 +54,7 @@ export default class App extends React.Component {
           this.setState({numRows: snap.val()});
       });
       let colRef = firebase.database().ref('grids/' + newGrid +'/numCols');
-      rowRef.on('value', snap => {
+      colRef.on('value', snap => {
           this.setState({numCols: snap.val()});
       });
   }
