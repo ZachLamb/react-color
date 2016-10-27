@@ -87,7 +87,6 @@ class SnakeAI {
         for (var i = 0; i < 3; i++) {
             var potential = this._getTurnDir(currPosn[0], currPosn[1],
                     absDirs[i]);
-            console.log(potential);
             if (potential === null) {
                 numNull++;
             }
@@ -107,16 +106,22 @@ class SnakeAI {
         }
         if (randNum < 0.75) {
             if (options[0] !== null) {
-                return options[1];
-            }
-        } else {
-            if (options[2] !== null) {
-                return options[2];
-            } else if (options[1] !== null) {
-                return options[1];
-            } else {
+                this.currDirection = (this.currDirection + 1) % 4;
                 return options[0];
             }
+        }
+        if (options[2] !== null) {
+            if (this.currDirection - 1 < 0) {
+                this.currDirection = DOWN;
+            } else {
+                this.currDirection--;
+            }
+            return options[2];
+        } else if (options[1] !== null) {
+            return options[1];
+        } else {
+            this.currDirection = (this.currDirection + 1) % 4;
+            return options[0];
         }
     }
 
@@ -150,7 +155,6 @@ class SnakeAI {
         var nextColor = this.grid.getCell(nextCell[0], nextCell[1]);
         if (nextColor[0] !== 255 || nextColor[1] !== 255
                 || nextColor[2] !== 255) {
-            console.log(nextColor);
             return null;
         }
         return nextCell;
