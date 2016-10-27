@@ -5,7 +5,7 @@ import colors from '.././_colors.scss';
 export default class Palette extends React.Component {
   constructor(){
     super();
-    this.handleClick = this.handleClick.bind(this);
+    this.handleClick = this.handleClick.bind( this );
   }
 
   handleClick( event ){
@@ -35,7 +35,7 @@ export default class Palette extends React.Component {
 
     return(
       <div className={ 'row ' + styles.palette }>
-        <div className="col-md-5">{ paintPots.splice( 0, halfOfPaint ) }</div>
+        <div className="col-md-5" style={{ marginRight: '3px' }}>{ paintPots.splice( 0, halfOfPaint ) }</div>
         <div className="col-md-5">{ paintPots.splice( 0, halfOfPaint ) }</div>
       </div>
     )
