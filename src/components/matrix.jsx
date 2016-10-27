@@ -18,7 +18,7 @@ export default class Matrix extends React.Component {
  }
 
   componentWillReceiveProps(nextProps) {
-      if (this.props.numCols !== nextProps.numCols) {
+      if (this.props.numCols !== nextProps.numCols || this.props.numRows !== nextProps.numRows) {
           this.updateGridSize(nextProps);
       }
   }
@@ -42,7 +42,7 @@ export default class Matrix extends React.Component {
   render() {
     if (this.state.numRows === 0 || this.state.numCols === 0) {
         return(
-          <p> Could not load grid! </p>
+          <p> Select a valid grid </p>
         )
     }
     let matrix = []
