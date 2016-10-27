@@ -1,6 +1,7 @@
 import React from 'react';
 import * as firebase from 'firebase';
 
+import Fireworks from './fireworks.jsx';
 import Matrix from './matrix.jsx';
 import MatrixSize from './matrixSize.jsx'
 import Palette from './palette.jsx';
@@ -73,6 +74,11 @@ export default class App extends React.Component {
               <GridSelector gridSelector={ this.changeGrid }
                             possibleGrids={ this.state.possibleGrids }
               />
+            </div>
+            <div className="col-sm-2">
+              <Fireworks gridId={this.state.gridId}
+                        numCols={this.state.numCols}
+                        numRows={this.state.numRows} />
             </div>
             <div className="col-sm-2">
               <Randomize gridId={this.state.gridId}
