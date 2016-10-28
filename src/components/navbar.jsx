@@ -12,15 +12,18 @@ export default class NavBar extends React.Component {
     this.state ={
       displayName: null
     }
-    // this.handleClick = this.handleClick.bind( this );
+    this.handleClick = this.handleClick.bind( this );
   }
   componentWillReceiveProps(nextProps) {
       if (this.props.name !== nextProps.name) {
       this.setState({displayName: nextProps.name});
       }
   }
+  handleClick(){
+    manageLogin(this.props.getGrid);
+  }
   render(){
-    if(this.state.displayName != "null"){
+    if(this.state.displayName != null){
       return(
         <nav className="navbar navbar-dark bg-info">
           <a className="navbar-brand" href="#">React Color</a>
@@ -50,7 +53,7 @@ export default class NavBar extends React.Component {
             <NewGrid changeGrid={this.props.changeGrid}/>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">Login</a>
+            <a className="nav-link" onClick={this.handleClick()} href="#">Login</a>
           </li>
         </ul>
       </nav>
@@ -60,5 +63,6 @@ export default class NavBar extends React.Component {
 }
 NavBar.propTypes = {
   changeGrid: React.PropTypes.func,
-  name: React.PropTypes.string
+  name: React.PropTypes.string,
+  getGrid: React.PropTypes.func
 }
