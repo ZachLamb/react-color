@@ -46,14 +46,18 @@ export default class ShareComponent extends React.Component {
         // gets keys of current grid users
         gridRef.once( 'value', gridRefSnapshot => {
           gridRefSnapshot.forEach( user => {
-            currentUserArray.push( user.key )
+              if(user.key !== null) {
+                  currentUserArray.push( user.key );
+              }
           } );
 
           // retrieve emails of grid users by matching user keys with user list
           usersRef.once( 'value', userSnapshot => {
             userSnapshot.forEach( user => {
               if( _.includes( currentUserArray, user.key ) ){
-                currentUserEmails.push( user.child( 'email' ).val() )
+                if(user.child( 'email' ).val() !== null ) {
+                    currentUserEmails.push( user.child( 'email' ).val() );
+                }
               }
             } );
 
