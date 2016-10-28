@@ -35,8 +35,10 @@ function promptForLogin(uidCallback) {
 export function manageLogin(uidCallback) {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
+            localStorage.setItem("displayName",user.displayName);
             uidCallback(user.uid);
         } else {
+            localStorage.setItem("displayName","null");
             promptForLogin(uidCallback);
         }
     });

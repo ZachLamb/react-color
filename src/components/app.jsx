@@ -69,13 +69,13 @@ export default class App extends React.Component {
   render() {
     if(this.state.displayName == null){
       return(
-        <NavBar changeGrid={this.changeGrid} name={ this.state.displayName } getGrid={ this.getAvailableGrids }/>
+        <NavBar changeGrid={this.changeGrid} name={ this.state.displayName } getGrid={ this.getAvailableGrids } checkLog={ this.checkLog }/>
       )
     }
     else{
       return (
         <div>
-          <NavBar changeGrid={this.changeGrid}/>
+          <NavBar changeGrid={this.changeGrid} name={ this.state.displayName } getGrid={ this.getAvailableGrids } checkLog={ this.checkLog }/>
           <div className="container">
             <div className={ "row " + styles.topBuffer }>
               <div className="col-sm-2">
