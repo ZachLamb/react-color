@@ -26,6 +26,7 @@ export default class NavBar extends React.Component {
   }
   handleClickLogout(){
     this.logUserOut(this.props.checkLog);
+    this.setState({displayName: null});
   }
 
   logUserOut(callback) {
