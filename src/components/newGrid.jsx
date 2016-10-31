@@ -8,7 +8,7 @@ import styles from '.././main.scss';
 export default class NewGrid extends React.Component {
   constructor(){
     super();
-    this.state = {numRows: '',numCols: '', gridName: '', showModal: false}
+    this.state = {numRows: '',numCols: '', gridName: '', showModal: false, invalidRows: false, invalidCols: false}
     this.createGrid = this.createGrid.bind(this);
     this.setRows = this.setRows.bind(this);
     this.setCols = this.setCols.bind(this);
@@ -39,11 +39,25 @@ export default class NewGrid extends React.Component {
   }
 
   handleClick(event){
-    this.state.showModal = false;
     manageLogin(this.createGrid);
   }
 
   createGrid(uid) {
+    if(isNaN(parseInt(this.state.numCols))){
+      this.setState({invalidCols: true});
+    }
+    else
+    {
+       this.setState({invalidCols: false});
+    }
+    if(isNaN(parseInt(this.state.numRows))){
+        this.setState({invalidRows: true});
+    }
+    else
+    {
+       this.setState({invalidRows: false});
+    }
+    if(this.state.invalidRows == false && this.state.invalidCols == false){
     this.gridRef = firebase.database().ref('grids/');
     // Add new grid to the grids/
     let newGridRef = this.gridRef.push();
@@ -59,6 +73,13 @@ export default class NewGrid extends React.Component {
     let newGridKey = newGridRef.key;
     userRef.child(newGridKey).set((this.state.gridName).toString());
     this.props.changeGrid(newGridKey);
+    this.setState({showModal: false});
+    }
+    else {
+      console.log("Error creating grid");
+      this.setState({showModal : true});
+    }
+
   }
 
   render(){
@@ -74,8 +95,23 @@ export default class NewGrid extends React.Component {
                                           onChange={this.setName} /></p>
             <p><input type="text" className="form-control" placeholder="Number of rows"
                                          onChange={this.setRows} /></p>
+            <div className="hidden">{this.state.invalidRows ?
+            <div className="alert alert-danger" role="alert">
+            <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span className="sr-only">Error:</span>
+              Number of rows must be a positive integer!
+            </div>
+            :null}</div>
             <p><input type="text" className="form-control" placeholder="Number of columns" 
                                           onChange={this.setCols} /></p>
+            <div className="hidden">{this.state.invalidCols ?
+            <div show={this.state.invalidColumns} className="alert alert-danger" role="alert">
+            <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span className="sr-only">Error:</span>
+              Number of columns must be a positive integer!
+            </div>
+            :null}</div>
+            
           </Modal.Body>
           <Modal.Footer>
               <button className={ "btn btn-default " + styles.modalButton } onClick={ this.close }>Close</button>
