@@ -31,6 +31,8 @@ class VirtualGrid {
         var cellPath = 'grids/' + this.gridId + '/r' + row + '/c' + col;
         var cellRef = firebase.database().ref(cellPath);
         cellRef.set(rgbString);
+
+        this.grid[row][col][0] = color;
     }
 
     /* Gets a cell value.
@@ -43,7 +45,7 @@ class VirtualGrid {
      *  values from 0-255.
      */
     getCell(row, col) {
-        return this.grid[row][col];
+        return this.grid[row][col][0];
     }
 
     /* Gets the dimensions of the grid.
@@ -103,7 +105,7 @@ class VirtualGrid {
                 for (var c = 0; c < numCols; c++) {
                     var cellRef = firebase.database().ref(rowPath + 'c'
                             + String(c));
-                    cellRef.once('value', createCellUpdater(r, c));
+                    cellRef.on('value', createCellUpdater(r, c));
                 }
             }
         }

@@ -98,7 +98,7 @@ function main(){
     var gameOfLifeGrid = new VirtualGrid('-KV6ko8ro6TrfSUzAaZ0');
     setTimeout(function() {
         EvaluateGrid(gameOfLifeGrid);
-        setInterval(function() { EvaluateGrid(gameOfLifeGrid); } , 25);
+        setInterval(function() { EvaluateGrid(gameOfLifeGrid); } , 75);
     } , 5000);
 
 
