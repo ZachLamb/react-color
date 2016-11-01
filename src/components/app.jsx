@@ -41,9 +41,9 @@ export default class App extends React.Component {
      });
   }
   checkLogout(){
-      let session = localStorage.getItem('displayName')
       this.setState({displayName: null});
-      this.setState({gridId: null})
+      this.setState({gridId: null});
+      Location.reload();
     }
 
   onSelectColor( val ){

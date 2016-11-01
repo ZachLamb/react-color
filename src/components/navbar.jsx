@@ -17,9 +17,12 @@ export default class NavBar extends React.Component {
     this.logUserOut = this.logUserOut.bind( this );
   }
   componentWillReceiveProps(nextProps) {
-      if (this.props.name !== nextProps.name) {
+      if (this.props.name != nextProps.name) {
       this.setState({displayName: nextProps.name});
       }
+  }
+  componentDidMount(){
+    this.setState({displayName: this.props.name});
   }
   handleClickLogin(){
       manageLogin(this.props.getGrid);
