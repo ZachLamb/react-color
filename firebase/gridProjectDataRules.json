@@ -9,8 +9,8 @@
         },
         "grids" : {
             "$grid" : {
-                ".read" : "auth != null && (data.child('users').child(auth.uid).exists() || !data.exists())",
-                ".write" : "auth != null && (data.child('users').child(auth.uid).exists() || !data.exists())",
+                ".read" : "auth != null && (data.child('users').child(auth.uid).exists() || !data.exists() || data.child('public').val() == true)",
+                ".write" : "auth != null && (data.child('users').child(auth.uid).exists() || !data.exists() || data.child('public').val() == true)",
     			".validate" : "newData.hasChildren()",
                 "numCols" : {
                   ".validate" : "newData.val() > 0"
