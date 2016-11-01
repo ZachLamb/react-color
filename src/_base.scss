@@ -1,7 +1,3 @@
-h1, h2, h3 {
-    font-family: 'Open Sans', sans-serif;
-}
-
 .cell {
     border: 1px solid rgba(0, 0, 0, 0.3);
     display: inline-block;
@@ -9,10 +5,12 @@ h1, h2, h3 {
     margin: 0;
     width: 2.6vw;
 }
+.loadError {
+    margin: 1em;
+}
 .topBuffer {
     margin-top: 20px;
 }
-
 .wrapper {
     overflow: hidden;
 }
@@ -20,8 +18,8 @@ h1, h2, h3 {
 /* Matrix Styles */
 .matrix {
     display: block;
-    margin: 20px auto;
-    min-width: 100%;
+    margin: 20px;
+    text-align: center;
 }
 .matrixColumn {
     display: inline-block;
@@ -57,7 +55,8 @@ h1, h2, h3 {
 
 /* Sidebar Styles */
 .sidebarNav {
-    background-color: rgba(49, 143, 135, 0.15);
+    box-shadow: 5px 8px 10px rgba(11, 53, 81, 0.16);
+    // border-right: 8px double rgba(11, 53, 81, 0.16);
     display: block;
     left: 230px;
     margin-bottom: -2000px;
@@ -74,6 +73,9 @@ h1, h2, h3 {
     position: absolute;
     .dangerZone {
         margin-top: 2em;
+    }
+    .generalOptions {
+        margin-bottom: 20px;
     }
 }
 

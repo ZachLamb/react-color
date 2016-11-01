@@ -48,7 +48,9 @@ export default class Matrix extends React.Component {
   render() {
     if (this.state.numRows === 0 || this.state.numCols === 0) {
         return(
-          <p> Could not load grid! </p>
+          <div className={ "alert alert-danger " + styles.loadError } role="alert">
+            <strong>Sorry,</strong> could not load grid!
+          </div>
         )
     }
     let matrix = []

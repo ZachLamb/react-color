@@ -72,13 +72,13 @@ export default class App extends React.Component {
           </div>
 
           <div className="col-md-9">
-            {/*<div className={ "row " + styles.topBuffer }>
+            <div className={ "row " + styles.topBuffer }>
               <div className="col-sm-2">
                 <GridSelector gridSelector={ this.changeGrid }
                               possibleGrids={ this.state.possibleGrids }
                 />
               </div>
-            </div> */ }
+            </div>
 
             <div className="row">
               <div className="col-xs-12 col-sm-12 col-md-10">

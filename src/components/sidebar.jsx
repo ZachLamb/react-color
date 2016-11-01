@@ -14,8 +14,8 @@ export default class SideBar extends React.Component {
     return(
       <div className={ styles.sidebarNav }>
         <div className={ styles.sidebarContent }>
-          <div className="row">
-            <span style={{ fontWeight: 600, marginLeft: '15px', color: 'rgba(0, 0, 0, 0.75)'}}>Grid Options</span>
+          <div className={ "row " + styles.generalOptions }>
+            <span style={{ fontWeight: 600, marginLeft: '15px', color: 'rgba(0, 0, 0, 0.75)' }}>Grid Options</span>
           </div>
           <div className="row">
             <MatrixSize gridId={ this.props.gridId } 
