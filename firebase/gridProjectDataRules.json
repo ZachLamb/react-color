@@ -20,6 +20,7 @@
                 },
                 "name" : {},
                 "users" : {},
+                "public" : {},
                 "$row" : {
                     ".validate" : "$row.matches(/^(r)[0-9]+$/) && newData.hasChildren()",
                     "$col" : {
