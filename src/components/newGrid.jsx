@@ -63,7 +63,7 @@ export default class NewGrid extends React.Component {
     let usersObj = {};
     usersObj[uid] = true;
     let newGridObj = {};
-    newGridObj['name'] = (this.state.gridName).toString();
+    newGridObj['name'] = this.state.gridName.toString();
     newGridObj['numCols'] = parseInt(this.state.numCols);
     newGridObj['numRows'] = parseInt(this.state.numRows);
     newGridObj['users'] = usersObj;
