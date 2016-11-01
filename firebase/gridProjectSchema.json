@@ -1,6 +1,7 @@
 {
     "grids" : [ {
         "name" : "grid0",
+        "public": true,
         "numCols" : 3,
         "numRows" : 3,
         "users" : {

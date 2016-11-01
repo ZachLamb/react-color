@@ -1,5 +1,11 @@
 import * as firebase from 'firebase';
 
+var communityGridsList = {
+    "-KV6ko8ro6TrfSUzAaZ0" : "Community",
+    "-KVSqHMKRZHj_KVypN69" : "Game Of Life",
+    "-KVSqIeH49GVqrFF6F61" : "Snake"
+};
+
 function promptForLogin(uidCallback) {
     var provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider).then(result => {
@@ -11,10 +17,11 @@ function promptForLogin(uidCallback) {
         var accountCheck = firebase.database().ref('users/' + uid);
         accountCheck.once("value", snapshot => {
             if (snapshot.val() === null) {
-                accountCheck.set({
+
+                snapshot.ref.set({
                     admin: 'false',
                     email: user_email,
-                    grids: {}
+                    grids: communityGridsList
                 });
             }
         });
@@ -35,9 +42,20 @@ function promptForLogin(uidCallback) {
 export function manageLogin(uidCallback) {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
+            localStorage.setItem("displayName",user.displayName);
             uidCallback(user.uid);
         } else {
+            localStorage.setItem("displayName","null");
             promptForLogin(uidCallback);
+        }
+    });
+}
+
+export function signInIfReturning(uidCallback) {
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            localStorage.setItem("displayName",user.displayName);
+            uidCallback(user.uid);
         }
     });
 }
