@@ -12,6 +12,8 @@ import DeleteGrid from './deleteGrid.jsx';
 import ResetGridColor from './resetGridColor.jsx';
 import NewGrid from './newGrid.jsx';
 
+import {signInIfReturning} from '../util/login.js'
+
 import styles from '../main.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -30,6 +32,12 @@ export default class App extends React.Component {
     this.changeGrid = this.changeGrid.bind(this);
     this.getAvailableGrids = this.getAvailableGrids.bind(this);
     this.checkLogout = this.checkLogout.bind(this);
+  }
+
+  componentDidMount() {
+      console.log("HERE");
+      signInIfReturning(this.getAvailableGrids);
+      console.log("THERE");
   }
 
   getAvailableGrids(uid) {

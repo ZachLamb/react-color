@@ -38,8 +38,17 @@ export function manageLogin(uidCallback) {
             localStorage.setItem("displayName",user.displayName);
             uidCallback(user.uid);
         } else {
-          localStorage.setItem("displayName","null");
+            localStorage.setItem("displayName","null");
             promptForLogin(uidCallback);
+        }
+    });
+}
+
+export function signInIfReturning(uidCallback) {
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            localStorage.setItem("displayName",user.displayName);
+            uidCallback(user.uid);
         }
     });
 }
