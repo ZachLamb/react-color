@@ -55,10 +55,12 @@ export default class Matrix extends React.Component {
     for(var i = 0; i < this.state.numCols;i++){
       let column = []
       for(var j = 0;j < this.state.numRows;j++){
-        column.push(<Cell row={j} col={i} key={'r' + j + 'c' + i}
+        column.push(<Cell row={j} col={i} key={this.props.gridId + '/' + 'r'
+            + j + 'c' + i}
                      gridId={this.props.gridId} color={this.props.color} />)
       }
-      matrix.push(<div key={i} className={styles.matrixColumn}>{column}</div>)
+      matrix.push(<div key={this.props.gridId + '/' + i}
+              className={styles.matrixColumn}>{column}</div>)
     }
     return(
       <div className={styles.matrix}>{matrix}</div>
