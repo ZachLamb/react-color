@@ -46,12 +46,18 @@ export default class NewGrid extends React.Component {
     if(isNaN(parseInt(this.state.numCols))){
       this.setState({invalidCols: true});
     }
+    else if(parseInt(this.state.numCols) >= 20){
+      this.setState({invalidCols: true});
+    }
     else
     {
        this.setState({invalidCols: false});
     }
     if(isNaN(parseInt(this.state.numRows))){
         this.setState({invalidRows: true});
+    }
+    else if(parseInt(this.state.numRows) >= 20){
+      this.setState({invalidRows: true});
     }
     else
     {
@@ -97,7 +103,7 @@ export default class NewGrid extends React.Component {
             <div className="alert alert-danger" role="alert">
             <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
             <span className="sr-only">Error:</span>
-              Number of rows must be a positive integer!
+              Number of rows must be a positive integer less than 20
             </div>
             :null}</div>
             <p><input type="text" className="form-control" placeholder="Number of columns" 
@@ -106,7 +112,7 @@ export default class NewGrid extends React.Component {
             <div show={this.state.invalidColumns} className="alert alert-danger" role="alert">
             <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
             <span className="sr-only">Error:</span>
-              Number of columns must be a positive integer!
+              Number of columns must be a positive integer less than 20
             </div>
             :null}</div>
           </Modal.Body>
