@@ -107,7 +107,7 @@ export default class ShareComponent extends React.Component {
   render(){
     return (
       <div>
-        <button className="btn btn-primary" onClick={ this.open }>Share Grid</button>
+        <button className="btn btn-primary btn-sm" onClick={ this.open }>Share Grid</button>
 
         <Modal show={ this.state.showModal } onHide={ this.close }>
           <Modal.Header closeButton>

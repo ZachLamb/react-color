@@ -1,6 +1,7 @@
-.button {
-    margin: 3px 2px;
+h1, h2, h3 {
+    font-family: 'Open Sans', sans-serif;
 }
+
 .cell {
     border: 1px solid rgba(0, 0, 0, 0.3);
     display: inline-block;
@@ -9,13 +10,18 @@
     width: 2.6vw;
 }
 .topBuffer {
-  margin-top: 20px;
+    margin-top: 20px;
+}
+
+.wrapper {
+    overflow: hidden;
 }
 
 /* Matrix Styles */
 .matrix {
-    display: inline-block;
+    display: block;
     margin: 20px auto;
+    min-width: 100%;
 }
 .matrixColumn {
     display: inline-block;
@@ -32,9 +38,9 @@
     border-radius: 50%;
     cursor: pointer;
     display: block;
-    height: 4.5vw;
-    margin: 3vh auto;
-    width: 4.5vw;
+    height: 4vw;
+    margin: 3vh 10px;
+    width: 4vw;
 }
 
 /* Modal Styles */
@@ -47,6 +53,28 @@
 }
 .userList {
     color: $blue;
+}
+
+/* Sidebar Styles */
+.sidebarNav {
+    background-color: rgba(49, 143, 135, 0.15);
+    display: block;
+    left: 230px;
+    margin-bottom: -2000px;
+    margin-left: -230px;
+    padding-bottom: 2000px;
+    position: fixed;
+    top: 0;
+    width: 230px;
+    z-index: -100;
+}
+.sidebarContent {
+    top: 90px;
+    padding: 15px;
+    position: absolute;
+    .dangerZone {
+        margin-top: 2em;
+    }
 }
 
 /* Media Queries */

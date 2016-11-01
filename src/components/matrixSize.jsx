@@ -1,5 +1,7 @@
 import React from 'react';
 import * as firebase from 'firebase';
+
+import styles from '../main.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class MatrixSize extends React.Component {
@@ -17,30 +19,34 @@ export default class MatrixSize extends React.Component {
       this.setState({ numCols: event.target.value });
   }
   handleClick(){
-  firebase.database().ref('grids/' + this.state.gridId + '/numRows' ).set(parseInt(this.state.numRows));
-  firebase.database().ref('grids/' + this.state.gridId + '/numCols' ).set(parseInt(this.state.numCols));
+      firebase.database().ref('grids/' + this.state.gridId + '/numRows' ).set(parseInt(this.state.numRows));
+      firebase.database().ref('grids/' + this.state.gridId + '/numCols' ).set(parseInt(this.state.numCols));
 
-   this.props.updateGrid(this.state.gridId);
+      this.props.updateGrid(this.state.gridId);
   }
   componentDidMount(){
-    this.setState({gridId: this.props.gridId});
+      this.setState({gridId: this.props.gridId});
   }
 
   render() {
     return (
-    <div>
-    <input
-        className="form-control" type="text"
-        placeholder="Enter new Row"
-        defaultValue={this.state.numCols}
-        onChange={this.onUpdateRow}/>
-    <input
-        className="form-control" type="text"
-        placeholder="Enter New Column"
-        defaultValue={this.state.numCols}
-        onChange={this.onUpdateCol}/>
-    <button className="btn btn-default" onClick={ this.handleClick }>Update Grid</button>
+    <div className="col-sm-9">
+      <div className="input-group input-group-sm">
+          <input
+              className="form-control" type="text"
+              placeholder="Enter new Row"
+              defaultValue={this.state.numCols}
+              onChange={this.onUpdateRow}
+          />
+          <input
+              className="form-control" type="text"
+              placeholder="Enter New Column"
+              defaultValue={this.state.numCols}
+              onChange={this.onUpdateCol}
+          />
       </div>
+      <button className="btn btn-primary btn-sm" onClick={ this.handleClick }>Update Grid</button>
+    </div>
     );
   }
 }
