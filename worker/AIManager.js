@@ -23,8 +23,7 @@ function testUsage() {
 
 function main() {
     getServiceAccountAuth();
-    //testUsage();
-    GameOfLife();
+    testUsage();
 }
 
 main();
