@@ -14,42 +14,44 @@ export default class Matrix extends React.Component {
   }
 
   componentDidMount() {
-      this.updateGridSize(this.props);
+    this.updateGridSize(this.props);
  }
 
   componentWillReceiveProps(nextProps) {
-      if (this.props.gridId !== nextProps.gridId
-          || this.props.numCols !== nextProps.numCols
-          || this.props.numRows !== nextProps.numRows) {
-          this.updateGridSize(nextProps);
-      }
+    if (this.props.gridId !== nextProps.gridId
+        || this.props.numCols !== nextProps.numCols
+        || this.props.numRows !== nextProps.numRows) {
+        this.updateGridSize(nextProps);
+    }
   }
 
   updateGridSize(nextProps) {
-     this.setState({numRows: 0, numCols: 0});
-     this.rowRef = firebase.database().ref('grids/' + nextProps.gridId + '/numRows');
-     this.colRef = firebase.database().ref('grids/' + nextProps.gridId + '/numCols');
-     try {
-        this.rowRef.once('value', snap => {
-            if (snap.val() !== null) {
-                this.setState({numRows: snap.val()});
-            }
-        });
-        this.colRef.once('value', snap => {
-            if (snap.val() !== null) {
-                this.setState({numCols: snap.val()});
-            }
-        });
-     } catch (err) {
-         console.log(err);
-     }
+    this.setState({numRows: 0, numCols: 0});
+    this.rowRef = firebase.database().ref('grids/' + nextProps.gridId + '/numRows');
+    this.colRef = firebase.database().ref('grids/' + nextProps.gridId + '/numCols');
+    try {
+      this.rowRef.once('value', snap => {
+          if (snap.val() !== null) {
+              this.setState({numRows: snap.val()});
+          }
+      });
+      this.colRef.once('value', snap => {
+          if (snap.val() !== null) {
+              this.setState({numCols: snap.val()});
+          }
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   render() {
     if (this.state.numRows === 0 || this.state.numCols === 0) {
-        return(
-          <p> Select a valid grid </p>
-        )
+      return(
+        <div className={ "alert alert-danger " + styles.loadError } role="alert">
+          <strong>Sorry,</strong> please select a valid grid.
+        </div>
+      )
     }
     let matrix = []
     for(var i = 0; i < this.state.numCols;i++){

@@ -28,9 +28,8 @@ export default class DeleteGrid extends React.Component {
 
   render() {
     return(
-      <button type="button"
-            className="btn btn-danger"
-            onClick={ this.handleClick }>
+      <button className="btn btn-outline-danger btn-sm"
+              onClick={ this.handleClick }>
         Delete Grid
       </button>
     );

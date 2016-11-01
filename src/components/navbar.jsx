@@ -4,6 +4,7 @@ import * as firebase from 'firebase';
 
 import {manageLogin} from '../util/login.js'
 
+import styles from '../main.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class NavBar extends React.Component {
@@ -29,12 +30,9 @@ export default class NavBar extends React.Component {
   render(){
     if(this.state.displayName !== null){
       return(
-        <nav className="navbar navbar-dark bg-info">
+        <nav className={ "navbar navbar-dark bg-info " + styles.navBar }>
           <a className="navbar-brand" href="#">React Color</a>
           <ul className="nav navbar-nav">
-            <li className="nav-item active">
-              <a className="nav-link" href="#">Dashboard <span className="sr-only">(current)</span></a>
-            </li>
             <li className="nav-item">
               <NewGrid changeGrid={this.props.changeGrid}/>
             </li>
@@ -50,9 +48,6 @@ export default class NavBar extends React.Component {
       <nav className="navbar navbar-dark bg-info">
         <a className="navbar-brand" href="#">React Color</a>
         <ul className="nav navbar-nav">
-          <li className="nav-item active">
-            <a className="nav-link" href="#">Dashboard <span className="sr-only">(current)</span></a>
-          </li>
           <li className="nav-item">
             <NewGrid changeGrid={this.props.changeGrid}/>
           </li>
