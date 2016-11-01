@@ -11,6 +11,7 @@ export default class ShareComponent extends React.Component {
     this.state = {
         userToShareWith: '',
         shareMessage: 'Grid is null',
+        emptyShareMessage: 'no one',
         currentUsers: [ ],
         showModal: false
     }
@@ -61,10 +62,8 @@ export default class ShareComponent extends React.Component {
               }
             } );
 
-            console.log(currentUserEmails.length);
-
             if(currentUserEmails.length === 0) {
-                currentUserEmails.push('no one');
+                currentUserEmails.push(this.state.emptyShareMessage);
             }
           } );
 
