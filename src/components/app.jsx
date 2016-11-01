@@ -65,10 +65,6 @@ export default class App extends React.Component {
     });
   }
 
-  resetGridColors(){
-    this.setState({selectedColor: 'rgb(0, 0, 0)'});
-  }
-
   render() {
     if(this.state.displayName == null){
       return(
@@ -88,32 +84,29 @@ export default class App extends React.Component {
                   checkLog={ this.checkLog }
           />
 
-          <div className="container row">
-            <div className="col-md-3">
+          <div className="container-fluid row">
+            <div className="col-xs-12 col-md-3">
               <SideBar gridId={this.state.gridId}
                        numCols={ this.state.numCols }
                        numRows={ this.state.numRows }
               />
             </div>
 
-            <div className="col-md-9">
-              <div className={ "row " + styles.topBuffer }>
-                <div className="col-sm-2">
-                  <GridSelector gridSelector={ this.changeGrid }
-                                possibleGrids={ this.state.possibleGrids }
-                  />
-                </div>
+            <div className="col-xs-12 col-md-9">
+              <div className="row" style={{ marginTop: '15px' }}>
+                <GridSelector gridSelector={ this.changeGrid }
+                              possibleGrids={ this.state.possibleGrids }
+                />
               </div>
-
-              <div className="row">
-                <div className="col-xs-12 col-sm-12 col-md-10">
+              <div className={ "row " + styles.topBuffer }>
+                <div className="col-xs-12 col-sm-12 col-md-9">
                     <Matrix color={ this.state.selectedColor }
                             gridId={ this.state.gridId }
                             numCols={ this.state.numCols }
                             numRows={ this.state.numRows }
                     />
                 </div>
-                <div className="col-xs-12 col-sm-12 col-md-2">
+                <div className="col-xs-12 col-sm-12 col-md-3">
                   <Palette onSelectColor={ this.onSelectColor }/>
                 </div>
               </div> {/* row */}

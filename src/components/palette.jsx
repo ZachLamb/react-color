@@ -35,8 +35,8 @@ export default class Palette extends React.Component {
 
     return(
       <div className={ 'row ' + styles.palette }>
-        <div className="col-md-5" style={{ marginRight: '3px' }}>{ paintPots.splice( 0, halfOfPaint ) }</div>
-        <div className="col-md-5">{ paintPots.splice( 0, halfOfPaint ) }</div>
+        <div className="col-md-4" style={{ marginRight: '3px' }}>{ paintPots.splice( 0, halfOfPaint ) }</div>
+        <div className="col-md-4">{ paintPots.splice( 0, halfOfPaint ) }</div>
       </div>
     )
   }

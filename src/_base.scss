@@ -12,7 +12,7 @@
     z-index: 10;
 }
 .topBuffer {
-    margin-top: 20px;
+    margin-top: 30px;
 }
 .wrapper {
     overflow: hidden;
@@ -39,9 +39,9 @@
     border-radius: 50%;
     cursor: pointer;
     display: block;
-    height: 4vw;
+    height: 3.7vw;
     margin: 3vh 10px;
-    width: 4vw;
+    width: 3.7vw;
 }
 
 /* Modal Styles */
@@ -54,6 +54,14 @@
 }
 .userList {
     color: $blue;
+}
+
+/* Grid List Buttons */
+.gridButton {
+    margin: 0 2px;
+}
+.gridList {
+    display: inline-block;
 }
 
 /* Sidebar Styles */
@@ -98,8 +106,8 @@
     }
     .paintPot {
         display: inline-block;
-        height: 40px;
+        height: 30px;
         margin: 1vh 2vw;
-        width: 40px;
+        width: 30px;
     }
 }
