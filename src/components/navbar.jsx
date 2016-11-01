@@ -13,11 +13,9 @@ export default class NavBar extends React.Component {
       displayName: null
     }
     this.handleClickLogin = this.handleClickLogin.bind( this );
-    this.handleClickLogout = this.handleClickLogout.bind( this );
-    this.logUserOut = this.logUserOut.bind( this );
   }
   componentWillReceiveProps(nextProps) {
-      if (this.props.name != nextProps.name) {
+      if (this.props.name !== nextProps.name) {
       this.setState({displayName: nextProps.name});
       }
   }
@@ -27,18 +25,9 @@ export default class NavBar extends React.Component {
   handleClickLogin(){
       manageLogin(this.props.getGrid);
   }
-  handleClickLogout(){
-    this.logUserOut(this.props.checkLog);
-    this.setState({displayName: null});
-  }
 
-  logUserOut(callback) {
-    firebase.auth().signOut().then(callback, (err) => {
-      console.error('Sign Out Error', error);
-    });
-  }
   render(){
-    if(this.state.displayName != null){
+    if(this.state.displayName !== null){
       return(
         <nav className="navbar navbar-dark bg-info">
           <a className="navbar-brand" href="#">React Color</a>
@@ -51,9 +40,6 @@ export default class NavBar extends React.Component {
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#">{this.props.name}</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" onClick={this.handleClickLogout} href="#">Logout</a>
             </li>
           </ul>
         </nav>
