@@ -35,9 +35,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-      console.log("HERE");
       signInIfReturning(this.getAvailableGrids);
-      console.log("THERE");
   }
 
   getAvailableGrids(uid) {
