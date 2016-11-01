@@ -59,16 +59,15 @@ export default class NewGrid extends React.Component {
     }
     if(this.state.invalidRows == false && this.state.invalidCols == false){
     this.gridRef = firebase.database().ref('grids/');
-    // Add new grid to the grids/
     let newGridRef = this.gridRef.push();
     let usersObj = {};
     usersObj[uid] = true;
     let newGridObj = {};
+    newGridObj['name'] = (this.state.gridName).toString();
     newGridObj['numCols'] = parseInt(this.state.numCols);
     newGridObj['numRows'] = parseInt(this.state.numRows);
     newGridObj['users'] = usersObj;
-    newGridRef.set(newGridObj);0
-    // Add peprmission for the user who created.
+    newGridRef.set(newGridObj);
     let userRef = firebase.database().ref('users/' + uid + '/grids/');
     let newGridKey = newGridRef.key;
     userRef.child(newGridKey).set((this.state.gridName).toString());
@@ -76,10 +75,8 @@ export default class NewGrid extends React.Component {
     this.setState({showModal: false});
     }
     else {
-      console.log("Error creating grid");
       this.setState({showModal : true});
     }
-
   }
 
   render(){
@@ -111,7 +108,6 @@ export default class NewGrid extends React.Component {
               Number of columns must be a positive integer!
             </div>
             :null}</div>
-            
           </Modal.Body>
           <Modal.Footer>
               <button className={ "btn btn-default " + styles.modalButton } onClick={ this.close }>Close</button>
