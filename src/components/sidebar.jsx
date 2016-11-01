@@ -20,7 +20,7 @@ export default class SideBar extends React.Component {
           </div>
           <div className={ "row " + styles.optionSection }>
             <MatrixSize gridId={ this.props.gridId } 
-                        updateGrid={ this.changeGrid }
+                        updateGrid={ this.props.changeGrid }
             />
           </div> {/* row */}
 
@@ -29,16 +29,16 @@ export default class SideBar extends React.Component {
           </div>
           <div className={ "row " + styles.optionSection }>
             <div className="btn-group-vertical col-sm-10">
+                <Randomize gridId={this.props.gridId}
+                           numCols={this.props.numCols}
+                           numRows={this.props.numRows}
+                />
                 <ResetGridColor gridId={ this.props.gridId }
                                 numCols={ this.props.numCols }
                                 numRows={ this.props.numRows }
                 />
                 <DeleteGrid gridId={ this.props.gridId } 
-                            gridRemoval={ this.changeGrid }
-                />
-                <Randomize gridId={this.props.gridId}
-                           numCols={this.props.numCols}
-                           numRows={this.props.numRows}
+                            gridRemoval={ this.props.changeGrid }
                 />
             </div>
           </div> {/* row .dangerZone */}

@@ -86,7 +86,8 @@ export default class App extends React.Component {
 
           <div className="container-fluid row">
             <div className="col-xs-12 col-md-3">
-              <SideBar gridId={this.state.gridId}
+              <SideBar changeGrid={ this.changeGrid }
+                       gridId={this.state.gridId}
                        numCols={ this.state.numCols }
                        numRows={ this.state.numRows }
               />
