@@ -35,8 +35,8 @@ export default class SideBar extends React.Component {
                             gridRemoval={ this.changeGrid }
                 />
                 <Randomize gridId={this.props.gridId}
-                            numCols={this.props.numCols}
-                            numRows={this.props.numRows} 
+                           numCols={this.props.numCols}
+                           numRows={this.props.numRows}
                 />
             </div>
           </div>
