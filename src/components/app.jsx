@@ -31,29 +31,23 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-      signInIfReturning(this.getAvailableGrids);
+    signInIfReturning(this.getAvailableGrids);
   }
 
   getAvailableGrids(uid) {
-<<<<<<< HEAD
     let userGridsRef = firebase.database().ref('users/' + uid + '/grids');
+    let session = localStorage.getItem('displayName')
+    this.setState({displayName: session})
     userGridsRef.on('value', snap => {
        this.setState({possibleGrids: snap.val()});
     });
-=======
-     let userGridsRef = firebase.database().ref('users/' + uid + '/grids');
-     let session = localStorage.getItem('displayName')
-     this.setState({displayName: session})
-     userGridsRef.on('value', snap => {
-         this.setState({possibleGrids: snap.val()});
-     });
->>>>>>> master
   }
+
   checkLogout(){
-      this.setState({displayName: null});
-      this.setState({gridId: null});
-      Location.reload();
-    }
+    this.setState({displayName: null});
+    this.setState({gridId: null});
+    Location.reload();
+  }
 
   onSelectColor( val ){
     this.setState({ selectedColor: val });
@@ -127,6 +121,7 @@ export default class App extends React.Component {
           </div> {/* container row */}
 
         </div>
-    )
+      )
+    }
   }
 }

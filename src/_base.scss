@@ -8,6 +8,9 @@
 .loadError {
     margin: 1em;
 }
+.navBar {
+    z-index: 10;
+}
 .topBuffer {
     margin-top: 20px;
 }
@@ -58,24 +61,30 @@
     box-shadow: 5px 8px 10px rgba(11, 53, 81, 0.16);
     border-right: 8px double rgba(11, 53, 81, 0.16);
     display: block;
-    left: 230px;
+    left: 240px;
     margin-bottom: -2000px;
-    margin-left: -230px;
+    margin-left: -240px;
     padding-bottom: 2000px;
     position: fixed;
     top: 0;
-    width: 230px;
+    width: 240px;
 }
 .sidebarContent {
-    top: 90px;
     padding: 15px;
     position: absolute;
-    .dangerZone {
-        margin-top: 2em;
+    top: 50px;
+    .options {
+        margin: 20px 0 5px;
     }
-    .generalOptions {
-        margin-bottom: 20px;
+    .optionSection {
+        margin-left: 0px;
     }
+}
+.sidebarHeader {
+    color: rgba(0, 0, 0, 0.5);
+    clear: both;
+    font-weight: 600;
+    margin-left: 15px;
 }
 
 /* Media Queries */

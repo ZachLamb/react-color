@@ -14,19 +14,21 @@ export default class SideBar extends React.Component {
     return(
       <div className={ styles.sidebarNav }>
         <div className={ styles.sidebarContent }>
-          <div className={ "row " + styles.generalOptions }>
-            <span style={{ fontWeight: 600, marginLeft: '15px', color: 'rgba(0, 0, 0, 0.75)' }}>Grid Options</span>
+
+          <div className={ "row " + styles.options }>
+            <span className={ styles.sidebarHeader }>Grid Options</span>
           </div>
-          <div className="row">
+          <div className={ "row " + styles.optionSection }>
             <MatrixSize gridId={ this.props.gridId } 
                         updateGrid={ this.changeGrid }
             />
+          </div> {/* row */}
+
+          <div className={ "row " + styles.options }>
+            <span className={ styles.sidebarHeader }>Danger Zone</span>
           </div>
-          <div className="row col-sm-9">
-            <ShareComponent gridId={ this.props.gridId }/>
-          </div>
-          <div className={ "row " + styles.dangerZone }>
-            <div className="btn-group-vertical col-sm-9">
+          <div className={ "row " + styles.optionSection }>
+            <div className="btn-group-vertical col-sm-10">
                 <ResetGridColor gridId={ this.props.gridId }
                                 numCols={ this.props.numCols }
                                 numRows={ this.props.numRows }
@@ -39,8 +41,18 @@ export default class SideBar extends React.Component {
                            numRows={this.props.numRows}
                 />
             </div>
+          </div> {/* row .dangerZone */}
+
+          <div className={ "row " + styles.options }>
+            <span className={ styles.sidebarHeader }>Sharing</span>
           </div>
-        </div>
+          <div className={ "row " + styles.optionSection }>
+            <div className="col-sm-10">
+              <ShareComponent gridId={ this.props.gridId }/>
+            </div>  
+          </div> {/* row */}
+
+        </div> {/* .sidebarContent */}
       </div>
     );
   }

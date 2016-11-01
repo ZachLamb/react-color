@@ -59,7 +59,7 @@ export default class MatrixSize extends React.Component {
 
   render() {
     return (
-    <div className="col-sm-9">
+    <div className="col-sm-10">
       <div className="input-group input-group-sm">
         <input
             className="form-control" type="text"
