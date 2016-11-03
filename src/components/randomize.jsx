@@ -46,7 +46,7 @@ export default class Randomize extends React.Component {
   render() {
     if(this.props.enabled == "enabled"){
       return (
-        <button className="btn btn-outline-danger btn-sm" onClick={this.handleClick}>Randomize Colors</button>
+        <button className="btn btn-danger btn-sm" onClick={this.handleClick}>Randomize Colors</button>
       )
     }
     else{
