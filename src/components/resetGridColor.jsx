@@ -22,8 +22,15 @@ export default class ResetGridColor extends React.Component {
  }
 
   render(){
-    return(
-      <button className={ "btn btn-outline-danger btn-sm " + styles.button } onClick={ this.handleClick }>Reset</button>
-    )
+    if(this.props.enabled == "enabled"){
+      return(
+        <button className={ "btn btn-danger btn-sm " + styles.button } onClick={ this.handleClick }>Reset</button>
+      )
+    }
+    else{
+      return(
+        <button className={ "btn btn-danger btn-sm " + styles.button } disabled={this.props.enabled} onClick={ this.handleClick }>Reset</button>
+      )
+    }
   }
 }
