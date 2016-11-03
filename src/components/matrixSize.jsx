@@ -58,25 +58,50 @@ export default class MatrixSize extends React.Component {
   }
 
   render() {
-    return (
-    <div className="col-sm-10">
-      <div className="input-group input-group-sm">
-        <input
-            className="form-control" type="text"
-            placeholder="Enter new Row"
-            defaultValue={ this.state.numCols }
-            onChange={ this.onUpdateRow }
-        />
-        <input
-            className="form-control" type="text"
-            placeholder="Enter New Column"
-            defaultValue={ this.state.numCols }
-            onChange={ this.onUpdateCol }
-        />
+    if(this.props.gridId == "null"){
+      return (
+      <div className="col-sm-10">
+        <div className="input-group input-group-sm">
+          <input
+              className="form-control" type="text"
+              placeholder="Enter new Row"
+              defaultValue={ this.state.numCols }
+              onChange={ this.onUpdateRow }
+              disabled="disabled"
+          />
+          <input
+              className="form-control" type="text"
+              placeholder="Enter New Column"
+              defaultValue={ this.state.numCols }
+              onChange={ this.onUpdateCol }
+              disabled="disabled"
+          />
+        </div>
+        <button className="btn btn-primary btn-sm" disabled="disabled" onClick={ this.handleClick }>Update Grid</button>
       </div>
-      <button className="btn btn-primary btn-sm" onClick={ this.handleClick }>Update Grid</button>
-    </div>
-    );
+      );
+    }
+    else{
+      return (
+      <div className="col-sm-10">
+        <div className="input-group input-group-sm">
+          <input
+              className="form-control" type="text"
+              placeholder="Enter new Row"
+              defaultValue={ this.state.numCols }
+              onChange={ this.onUpdateRow }
+          />
+          <input
+              className="form-control" type="text"
+              placeholder="Enter New Column"
+              defaultValue={ this.state.numCols }
+              onChange={ this.onUpdateCol }
+          />
+        </div>
+        <button className="btn btn-primary btn-sm" onClick={ this.handleClick }>Update Grid</button>
+      </div>
+      );
+    }
   }
 }
 

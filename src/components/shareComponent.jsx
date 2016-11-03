@@ -123,26 +123,36 @@ export default class ShareComponent extends React.Component {
   }
 
   render(){
-    return (
-      <div>
-        <button className="btn btn-primary btn-sm" onClick={ this.open }>Share Grid</button>
+    if(this.props.enabled == "enabled"){
+      return (
+        <div>
+          <button className="btn btn-primary btn-sm" onClick={ this.open }>Share Grid</button>
 
-        <Modal show={ this.state.showModal } onHide={ this.close }>
-          <Modal.Header closeButton>
-            <Modal.Title>Share this grid with other users</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <input type="text" className="form-control" placeholder="Enter an email address" onChange={ this.onUpdate }/>
-            <p className={ styles.sharedWith }> { this.state.shareMessage }
-              <span className={ styles.userList }> { this.state.currentUsers.join(', ') }</span>
-            </p>
-          </Modal.Body>
-          <Modal.Footer>
-              <button className={ "btn btn-default " + styles.modalButton } onClick={ this.close }>Close</button>
-              <button className={ "btn btn-primary " + styles.modalButton } onClick={ this.handleShare }>Share</button>
-          </Modal.Footer>
-        </Modal>
-      </div>
-    );
+          <Modal show={ this.state.showModal } onHide={ this.close }>
+            <Modal.Header closeButton>
+              <Modal.Title>Share this grid with other users</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <input type="text" className="form-control" placeholder="Enter an email address" onChange={ this.onUpdate }/>
+              <p className={ styles.sharedWith }> { this.state.shareMessage }
+                <span className={ styles.userList }> { this.state.currentUsers.join(', ') }</span>
+              </p>
+            </Modal.Body>
+            <Modal.Footer>
+                <button className={ "btn btn-default " + styles.modalButton } onClick={ this.close }>Close</button>
+                <button className={ "btn btn-primary " + styles.modalButton } onClick={ this.handleShare }>Share</button>
+            </Modal.Footer>
+          </Modal>
+        </div>
+      );
+    }
+    else{
+
+      return (
+        <div>
+          <button className="btn btn-primary btn-sm" disabled={this.props.enabled}>Share Grid</button>
+        </div>
+      );
+    }
   }
 }

@@ -68,11 +68,11 @@ export default class SideBar extends React.Component {
           </div> {/* row .dangerZone */}
 
           <div className={ "row " + styles.options }>
-            <span className={ styles.sidebarHeader }>Sharing</span>
+            <span className={ styles.sidebarHeader } >Sharing</span>
           </div>
           <div className={ "row " + styles.optionSection }>
             <div className="col-sm-10">
-              <ShareComponent gridId={ this.props.gridId }/>
+              <ShareComponent enabled={ this.state.enabled } gridId={ this.props.gridId }/>
             </div>
           </div> {/* row */}
 
