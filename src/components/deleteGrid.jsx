@@ -37,7 +37,7 @@ export default class DeleteGrid extends React.Component {
     }
     else{
       return(
-      <button className="btn btn-outline-danger btn-sm" disabled={this.props.enabled}
+      <button className="btn btn-danger btn-sm" disabled={this.props.enabled}
               onClick={ this.handleClick }>
         Delete Grid
       </button>
